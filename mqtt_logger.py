@@ -22,7 +22,7 @@ class MqttLogger:
 
         try:
             self.cur.execute(
-                """INSERT INTO mqtt_logger(topic, logtime, payload, payload_json) VALUES (%s, %s, %s, %s)""",
+                """INSERT INTO mqtt_logger(topic, logtime, payload) VALUES (%s, %s, %s)""",
                 (msg.topic, datetime.now(), msg.payload.decode(), None))
             self.conn.commit()
         except Exception as e:
