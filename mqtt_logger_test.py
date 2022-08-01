@@ -1,7 +1,5 @@
 import time
 from datetime import datetime
-import json
-import psycopg2
 import paho.mqtt.client as mqtt
 
 
@@ -11,7 +9,7 @@ class MqttLogger:
 
     def mqtt_init(self):
         self.client = mqtt.Client()
-        self.client.connect("192.168.178.35", 1883, 60)  # odroid
+        self.client.connect("192.168.178.32", 1883, 60)  # raspberry 4GB docker
 
     def get_time(self):
         return datetime.now().strftime("%d.%m.%Y %H:%M:%S")
@@ -30,5 +28,5 @@ if __name__ == "__main__":
             time.sleep(5)
 
     while True:
-        mqtt_logger.client.publish("/raspberry/howareyou")
+        mqtt_logger.client.publish("raspberry/howareyou")
         time.sleep(60)

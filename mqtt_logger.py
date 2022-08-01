@@ -18,24 +18,25 @@ class MqttLogger:
         print(self.get_time() + ": " + "Subscribed to: " + str(topics))
 
     def on_message(self, client, userdata, msg):
-        print(self.get_time() + ": " + msg.topic + " " + str(msg.payload))
+        print(self.get_time() + ": " + msg.topic + " " + str(msg.payload.decode()))
 
         try:
             self.cur.execute(
                 """INSERT INTO mqtt_logger(topic, logtime, payload) VALUES (%s, %s, %s)""",
-                (msg.topic, datetime.now(), msg.payload.decode(), None))
+                (msg.topic, datetime.now(), msg.payload.decode()))
             self.conn.commit()
         except Exception as e:
+            print(e)
             self.conn.rollback()
 
     def mqtt_init(self):
         self.client = mqtt.Client()
         self.client.on_connect = self.on_connect
         self.client.on_message = self.on_message
-        self.client.connect("192.168.178.35", 1883, 60)  # odroid
+        self.client.connect("192.168.178.32", 1883, 60)  # raspi 4GB
 
     def db_init(self):
-        self.conn = psycopg2.connect(database='mqtt', user='postgres', password='postgres', host='192.168.178.35')
+        self.conn = psycopg2.connect(database='mqtt', user='postgres', password='postgres', host='192.168.178.32')
         self.cur = self.conn.cursor()
 
     def get_time(self):
@@ -56,5 +57,5 @@ if __name__ == "__main__":
         except Exception as e:
             print(mqtt_logger.get_time() + ": " + e.__str__())
             connected = False
-            print("/nNot Connected. Try Again in 5 Seconds")
+            print("Not Connected. Try Again in 5 Seconds")
             time.sleep(5)
