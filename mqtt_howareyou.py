@@ -37,7 +37,7 @@ def mqtt_init():
     client.on_connect = on_connect
     client.on_message = on_message
     # client.connect("raspberrypi-lan.lyk3nnyrasmj0efc.myfritz.net", 1883, 60)
-    client.connect("192.168.178.113", 1883, 60)  # proxmox
+    client.connect("192.168.178.121", 1883, 60)  # proxmox
 
 
 def get_time():
