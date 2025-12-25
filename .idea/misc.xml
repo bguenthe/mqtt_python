@@ -3,7 +3,7 @@
   <component name="Black">
     <option name="sdkName" value="Python 3.9 (mqtt_python)" />
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" project-jdk-name="Python 3.10 (mqtt_python)" project-jdk-type="Python SDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" project-jdk-name="Python 3.14 (mqtt_python) (2)" project-jdk-type="Python SDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>

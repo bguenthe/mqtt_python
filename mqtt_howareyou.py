@@ -8,9 +8,8 @@ import paho.mqtt.client as mqtt
 
 client = None
 
-
-def on_connect(client, userdata, flags, rc):
-    print(get_time() + ": " + "Connected with result code " + str(rc))
+def on_connect(client, userdata, flags, reason_code, properties):
+    print(get_time() + ": " + "Connected with result code " + str(reason_code))
 
     topics = [("/raspberry/howareyou", 0), ]
 
