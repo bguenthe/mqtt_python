@@ -33,16 +33,16 @@ def on_message(client1, userdata, msg):
 
 def mqtt_init():
     global client
-    client = mqtt.Client()
+    client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
     client.on_connect = on_connect
     client.on_message = on_message
     # client.connect("raspberrypi-lan.lyk3nnyrasmj0efc.myfritz.net", 1883, 60)
-    client.connect("192.168.178.35", 1883, 60)  # odroid
-    # client.connect("192.168.178.33", 1883, 60)  # raspberrypi-lan
-    # client.connect("192.168.178.21", 1883, 60)  # raspberrypi-wlan
+    client.connect("192.168.178.113", 1883, 60)  # proxmox
+
 
 def get_time():
     return datetime.now().strftime("%d.%m.%Y %H:%M:%S")
+
 
 if __name__ == "__main__":
     connected = False
